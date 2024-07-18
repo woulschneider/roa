@@ -1,0 +1,26 @@
+{% extends 'consultas/base.html' %}
+
+{% block content %}
+<h2>Lista de Atendimentos</h2>
+<a href="{% url 'imprimir_lista_dia' %}" class="btn btn-primary mb-3">Imprimir Lista do Dia</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Paciente</th>
+            <th>Tipo</th>
+            <th>CID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for atendimento in atendimentos %}
+        <tr>
+            <td>{{ atendimento.data_atendimento|date:"d/m/Y H:i" }}</td>
+            <td>{{ atendimento.nome_paciente }}</td>
+            <td>{% if atendimento.primeira_avaliacao %}Primeira Avaliação{% else %}Retorno{% endif %}</td>
+            <td>{{ atendimento.cid }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
